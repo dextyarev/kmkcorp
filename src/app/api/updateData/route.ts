@@ -35,7 +35,7 @@ export async function PUT(request: any) {
     data: {
       name,
       adress,
-      phone,
+      phone: '' + phone,
     },
   });
 
