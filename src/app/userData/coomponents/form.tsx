@@ -54,7 +54,7 @@ export default function UserForm({ user }: any) {
           </Form.Item>
           <p className='text-gray-100'> Номер телефона </p>
           <Form.Item name="phone" rules={[{ required: true, message: 'Please input your phone number!' }]}>
-            <InputNumber min={70000000000} max={79999999999} controls={false}/>
+            <InputNumber className='w-[150px]' min={70000000000} max={79999999999} controls={false}/>
           </Form.Item>
           <Form.Item>
             <Button block type='primary' className='bg-blue-500' htmlType='submit'>Сохранить</Button>
