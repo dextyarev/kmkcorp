@@ -10,11 +10,10 @@ export default function DealsPage() {
 
   function getDeals() {
     fetch('https://kmkcorp.vercel.app/api/getDeals', {
-      method: 'POST',
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({})
+      }
     })
       .then((res) => res.json())
       .then((res) => {
