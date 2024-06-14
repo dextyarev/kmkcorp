@@ -12,22 +12,53 @@ export async function POST(request) {
             status: 401,
         })
     }
-    const deleteOrderProducts = await prismaClient.orderProduct.deleteMany({})
-    const deleteProducts = await prismaClient.product.deleteMany({})
-    const deleteCategory = await prismaClient.category.deleteMany({})
+
+    let allCategories = await prismaClient.category.findMany({})
+    let categories = []
 
     for (let ctg in data) {
-        const createCategory = await prismaClient.category.create({
-            data: {
-                name: data[ctg].name,
-                slug: data[ctg].slug,
-                image_url: data[ctg].image_url
+        const exist = await prismaClient.category.findFirst({
+            where: {
+                slug: data[ctg].slug
             }
         })
+        if (exist) { // Checking if category exists
+            if (exist.slug === data[ctg].slug) {
+                const update = await prismaClient.category.update({
+                    where: {
+                        id: exist.id,
+                        slug: data[ctg].slug
+                    },
+                    data: {
+                        image_url: data[ctg].image_url
+                    }
+                })
+                categories.push(update)
+            }
+        } else {
+            const createCategory = await prismaClient.category.create({
+                data: {
+                    name: data[ctg].name,
+                    slug: data[ctg].slug,
+                    image_url: data[ctg].image_url
+                }
+            })
+            categories.push(createCategory)
+        }
+        
+    }
+
+    // Remove categories not in 'categories'
+    const categoriesToRemove = allCategories.filter(cat => !categories.some(c => c.id === cat.id));
+    for (const cat of categoriesToRemove) {
+        await prismaClient.category.delete({
+            where: {
+                id: cat.id
+            }
+        });
     }
 
     return new Response(JSON.stringify("ok"), {
         status: 200,
     })
 }
-
