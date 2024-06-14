@@ -1,17 +1,30 @@
+"use client"
 import { Badge } from "@/components/ui/badge";
+import { useState, useEffect } from "react";
 import ProductItem from "@/components/ui/product-item";
 import { computeProductTotalPrice } from "@/helpers/product";
-import { prismaClient } from "@/lib/prisma";
 import { PercentIcon } from "lucide-react";
 
-const DealsPage = async () => {
-  const deals = await prismaClient.product.findMany({
-    where: {
-      discountPercentage: {
-        gt: 15,
+export default function DealsPage() {
+  const [deals, setDeals] = useState([])
+
+  function getDeals() {
+    fetch('https://kmkcorp.vercel.app/api/getDeals', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
       },
-    },
-  });
+      body: JSON.stringify({})
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        setDeals(res)
+    });
+  }
+
+  useEffect(() => {
+    getDeals();
+  }, [])
 
   return (
     <div className="flex flex-col gap-8 p-5">
@@ -33,5 +46,3 @@ const DealsPage = async () => {
     </div>
   );
 };
-
-export default DealsPage;
