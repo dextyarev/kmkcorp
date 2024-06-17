@@ -1,10 +1,30 @@
+"use client"
+import { useState, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
-import { prismaClient } from "@/lib/prisma";
 import { ShapesIcon } from "lucide-react";
 import CategoryItem from "./components/category-item";
 
-const CatalogPage = async () => {
-  const categories = await prismaClient.category.findMany({});
+export default function CatalogPage() {
+  const [categories, setCategories] = useState([])
+
+  function getCategories() {
+    fetch('http://localhost:3000/api/1c/getCategories', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({})
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        setCategories(res)
+    });
+  }
+
+  useEffect(() => {
+    getCategories();
+  }, [])
+
   return (
     <div className="flex flex-col gap-8 p-5">
       <Badge
@@ -23,5 +43,3 @@ const CatalogPage = async () => {
     </div>
   );
 };
-
-export default CatalogPage;
