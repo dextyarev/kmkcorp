@@ -8,7 +8,7 @@ export default function CatalogPage() {
   const [categories, setCategories] = useState([])
 
   function getCategories() {
-    fetch('http://localhost:3000/api/1c/getCategories', {
+    fetch('https://kmkcorp.vercel.app:3000/api/1c/getCategories', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
