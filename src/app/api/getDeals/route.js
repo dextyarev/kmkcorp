@@ -5,7 +5,7 @@ export async function GET() {
     const deals = await prismaClient.product.findMany({
         where: {
           discountPercentage: {
-            gt: 80,
+            gt: 4,
           },
         },
     });

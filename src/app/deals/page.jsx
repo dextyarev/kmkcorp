@@ -34,7 +34,7 @@ export default function DealsPage() {
         <PercentIcon size={16} />
         УНИКАЛЬНЫЕ ПРЕДЛОЖЕНИЯ
       </Badge>
-      <div className="grid-cols-3 grid gap-8">
+      <div className="grid grid-cols-4 gap-8">
         {deals.map((product) => (
           <ProductItem
             key={product.id}
