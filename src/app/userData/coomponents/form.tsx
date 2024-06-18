@@ -43,7 +43,7 @@ export default function UserForm({ user }: any) {
       </Badge>
 
       <div className='container flex flex-col items-center justify-center gap-4 h-screen'>
-        <Form form={form} onFinish={onFinish} initialValues={user} className='flex flex-col gap-4'>
+        <Form form={form} onFinish={onFinish} initialValues={user} className='flex flex-col gap-4 w-[450px]'>
           <p className='text-gray-100'> Фамилия Имя Отчество </p>
           <Form.Item name="name" rules={[{ required: true, message: 'Please input your name!' }]}>
             <Input placeholder='ФИО' />
