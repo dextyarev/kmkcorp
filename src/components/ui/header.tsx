@@ -40,6 +40,7 @@ const Header = () => {
   };
 
   const handleLogoutClick = async () => {
+    localStorage.clear()
     await signOut();
   };
   return (
