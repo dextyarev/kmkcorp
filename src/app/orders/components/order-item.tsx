@@ -44,10 +44,10 @@ const OrderItem = ({order}: OrderItemProps) => {
                     <AccordionTrigger>
                         <div className="flex flex-col gap-1 text-left">
                             <h2 className=" flex font-bold uppercase text-sm">ЗАКАЗ № {order.id}</h2>
-                            <p className="opacity-60 text-xs">Создан {format(order.createdAt.getHours() + 3, "d/MM/y 'в' HH:mm")}</p>
+                            <p className="opacity-60 text-xs">Создан {format(order.createdAt, "d/MM/y 'в' HH:mm")}</p>
                         </div>
                     </AccordionTrigger>
-
+ 
                     <AccordionContent>
                     <div className="flex flex-col gap-4">
                         <div className="flex items-center justify-between">

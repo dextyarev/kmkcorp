@@ -15,7 +15,7 @@ export const createOrder = async (
   });
 
   if (!userData || !userData.adress) {
-    return;
+    throw new Error('!');
   }
   
   const order = await prismaClient.order.create({
