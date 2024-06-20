@@ -25,7 +25,10 @@ const Cart = () => {
       return;
     }
 
-    const order = await createOrder(products, (data?.user as any).email).then(() => message.success("Заявка отправлена. Ожидайте звонка, в течение 10-15 минут")).catch((err) => message.error("Проверьте данные аккаунта"));
+    const order = await createOrder(products, (data?.user as any).email).then(() => {
+      message.success("Заявка отправлена. Ожидайте звонка, в течение 10-15 минут")
+      products.slice(1,0);
+    }).catch((err) => message.error("Проверьте данные аккаунта"));
 
   };
   return (
